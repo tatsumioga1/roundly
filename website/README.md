@@ -12,13 +12,37 @@ python -m http.server 8080 -d website
 
 Then open `http://localhost:8080`.
 
+## Docker Preview
+
+Build and run the production container locally:
+
+```bash
+docker compose up -d --build
+```
+
+Then open `http://localhost:8080`.
+
+Stop it with:
+
+```bash
+docker compose down
+```
+
 ## Cloudflare Tunnel Deployment
 
 Recommended shape on the Oracle instance:
 
-1. Copy the `website` folder to the server, for example `/var/www/radius`.
-2. Serve it with nginx or Caddy on localhost.
-3. Point `cloudflared` at that local server.
+1. Copy the `website` folder to the server, for example `~/radius/website`.
+2. Run the Docker container. It listens on `127.0.0.1:8080`.
+3. Point `cloudflared` at `http://localhost:8080`.
+
+Example server commands:
+
+```bash
+mkdir -p ~/radius
+cd ~/radius/website
+docker compose up -d --build
+```
 
 Example `cloudflared` ingress:
 
@@ -32,20 +56,11 @@ ingress:
   - service: http_status:404
 ```
 
-Example static server for a quick smoke test:
-
-```bash
-cd /var/www/radius
-python3 -m http.server 8080
-```
-
-For production, prefer nginx or Caddy as a service.
-
 ## Suggested Security Headers
 
 Radius does not need any third-party scripts or remote assets, so the site can run with tight headers.
 
-Example nginx headers:
+These are already included in `nginx.conf`:
 
 ```nginx
 add_header Content-Security-Policy "default-src 'self'; img-src 'self'; style-src 'self'; base-uri 'self'; frame-ancestors 'none'; form-action 'none'" always;
