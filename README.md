@@ -19,4 +19,8 @@ dotnet build -c Release
 - The taskbar remains clean; the app is controlled from the notification area.
 - Corner overlays are click-through and do not activate, resize, move, or clip other app windows.
 - Radius and enabled state are saved under `%AppData%\Radius\settings.json`.
-- The overlay refreshes when display settings change and periodically while running.
+- The overlay updates on startup, settings changes, and foreground app changes.
+
+## Website
+
+The promotional site lives in `website/` and is intended for `radius.northwindlab.website`.
