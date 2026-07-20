@@ -10,7 +10,7 @@
   <Identity
     Name="NorthwindLab.Roundly"
     Publisher="CN=27566557-59BE-43D8-89F4-F5E44F5D50DE"
-    Version="1.0.1.0" />
+    Version="1.0.2.0" />
 
   <Properties>
     <DisplayName>Roundly</DisplayName>
